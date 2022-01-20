@@ -58,3 +58,10 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+Timmy/Library/
+Timmy/ProjectSettings/
+Timmy/Logs/
+Timmy/obj/
+Timmy/Packages/
+Timmy/UserSettings/
+Timmy/Temp/
