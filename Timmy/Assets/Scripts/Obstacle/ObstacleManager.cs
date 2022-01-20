@@ -11,7 +11,6 @@ public class ObstacleManager : MonoBehaviour
     [Header("ObstacleData")]
     public int freeTracks;
     public float trackLength;
-    public int startObstacleTriggerAt;
     public float cellZLength;
     public int spawnFrontCount;
     public int initialSpawnCount;
