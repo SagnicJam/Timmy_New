@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -20,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public float superJumpAirMultiplier = 0.8f;
     public float currentAirMultiplier;
     public float currentMovementMultiplier;
+    bool isPlummitingForLaneSwitch;
 
     [Header("Special Mechanic")]
     [Header("SuperJump")]
@@ -62,10 +62,11 @@ public class PlayerController : MonoBehaviour
 
     [Header("Crouch")]
     public float plumitForce=5f;
+    public float falsePlumitOnLaneSwitchForce=5f;
     public float crouchTime;
     float crouchTemp;
     bool isCrouched;
-    bool isPlummiting;
+    bool isPlummitingForCrouch;
 
     [Header("GroundDetection")]
     bool isGrounded;
@@ -333,10 +334,15 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = Physics.Raycast(playerCentre.position, Vector3.down,playerHeight/2+0.1f);
         Debug.DrawLine(playerCentre.position, playerCentre.position+Vector3.down,Color.red);
-        if(isPlummiting&&isGrounded)
+        if(isPlummitingForCrouch&&isGrounded)
         {
-            isPlummiting = false;
+            isPlummitingForCrouch = false;
             Crouch();
+        }
+
+        if (isPlummitingForLaneSwitch && isGrounded)
+        {
+            isPlummitingForLaneSwitch = false;
         }
     }
 
@@ -415,10 +421,18 @@ public class PlayerController : MonoBehaviour
         if(currentLane==0)
         {
             targetPosition += Vector3.left * laneDistance;
+            //false plumit here
+            FalsePlumitOnLaneSwitch();
         }
         else if(currentLane==2)
         {
             targetPosition += Vector3.right * laneDistance;
+            //false plumit here
+            FalsePlumitOnLaneSwitch();
+        }
+        else if(currentLane ==1)
+        {
+            FalsePlumitOnLaneSwitch();
         }
         targetX = targetPosition.x;
     }
@@ -433,7 +447,14 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         rb.AddForce(-Vector3.up * plumitForce, ForceMode.Impulse);
-        isPlummiting = true;
+        isPlummitingForCrouch = true;
+    }
+
+    void FalsePlumitOnLaneSwitch()
+    {
+        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        rb.AddForce(-Vector3.up * falsePlumitOnLaneSwitchForce, ForceMode.Impulse);
+        isPlummitingForLaneSwitch = true;
     }
 
 
