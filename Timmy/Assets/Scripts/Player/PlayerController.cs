@@ -333,7 +333,13 @@ public class PlayerController : MonoBehaviour
     void CheckGround()
     {
         isGrounded = Physics.Raycast(playerCentre.position, Vector3.down,playerHeight/2+0.1f);
-        Debug.DrawLine(playerCentre.position, playerCentre.position+Vector3.down,Color.red);
+        Debug.DrawLine(playerCentre.position, playerCentre.position+Vector3.down*(playerHeight / 2 + 0.1f),Color.red);
+
+        //if(isGrounded&&!rb.isKinematic)
+        //{
+        //    rb.transform.position = new Vector3(rb.transform.position.x, 0, rb.transform.position.z);
+        //}
+
         if(isPlummitingForCrouch&&isGrounded)
         {
             isPlummitingForCrouch = false;
@@ -464,6 +470,7 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
+        rb.transform.position = new Vector3(rb.transform.position.x, 0, rb.transform.position.z);
         colliderTransform.localScale = new Vector3(colliderTransform.localScale.x, playerHeight/ 2.8f, colliderTransform.localScale.z);
         isCrouched = true;
     }

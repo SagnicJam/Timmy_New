@@ -737,6 +737,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleSpawnners:
+  - {fileID: 319887053}
+  - {fileID: 193780792}
+  - {fileID: 1731104080}
+  - {fileID: 1512721384}
   - {fileID: 1788165472}
   freeTracks: 10
   trackLength: 10
@@ -12817,7 +12821,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smoothSpeed: 10
   target: {fileID: 620154109}
-  doLerp: 0
+  doLerp: 1
 --- !u!81 &920321440
 AudioListener:
   m_ObjectHideFlags: 0
@@ -14182,7 +14186,7 @@ MonoBehaviour:
   spawnFrontCount: 1
   initialSpawnCount: 10
   spawnTriggerAt: 1
-  trackSpawnOffset: 30
+  trackSpawnOffset: 60
   trackPrefab: {fileID: 5097283424400148695, guid: cbd3f22cd4e5afd4baf9b3c0eb14fc23,
     type: 3}
 --- !u!4 &1041873231
