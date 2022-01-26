@@ -737,11 +737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleSpawnners:
-  - {fileID: 319887053}
-  - {fileID: 193780792}
-  - {fileID: 1512721384}
   - {fileID: 1788165472}
-  - {fileID: 1731104080}
   freeTracks: 10
   trackLength: 10
   cellZLength: 2.5
@@ -8548,9 +8544,9 @@ MonoBehaviour:
   rb: {fileID: 620154110}
   animator: {fileID: 1366297236}
   runSpeed: 12
-  movementMultiplier: 10
+  movementMultiplier: 15
   blackholemovementMultiplier: 15
-  airMultiplier: 1
+  airMultiplier: 0.8
   rampJumpMultiplier: 2.4
   superJumpAirMultiplier: 2.4
   currentAirMultiplier: 0
@@ -8569,14 +8565,15 @@ MonoBehaviour:
   slipTimeTemp: 0
   isSlipping: 0
   launchAngle: 60
-  launchForce: 12
+  launchForce: 30
   rampSnapMoveSpeed: 20
   isSnappingToRampApex: 0
   blackHoleTime: 3
   blackHoleTimeTemp: 0
   isRunningBlackHoleTimer: 0
-  jumpForce: 22
-  plumitForce: 10
+  jumpForce: 23
+  plumitForce: 18
+  falsePlumitOnLaneSwitchForce: 15
   crouchTime: 1
   playerHeight: 2
   groundDrag: 6
@@ -12820,7 +12817,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smoothSpeed: 10
   target: {fileID: 620154109}
-  doLerp: 1
+  doLerp: 0
 --- !u!81 &920321440
 AudioListener:
   m_ObjectHideFlags: 0
