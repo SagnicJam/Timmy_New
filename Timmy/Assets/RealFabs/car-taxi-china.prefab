@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4030043115054375632}
   - component: {fileID: 4030043115055702770}
   - component: {fileID: 4030043115056668722}
-  - component: {fileID: 5423480234630029439}
   m_Layer: 0
   m_Name: car-taxi-china-base
   m_TagString: Untagged
@@ -84,20 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5423480234630029439
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4030043115054481136}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 3405ac829edd2cc4cbe0535953095af0, type: 3}
 --- !u!1 &4030043115054481138
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,7 +108,7 @@ Transform:
   m_GameObject: {fileID: 4030043115054481138}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -265, y: 0, z: 40}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.4, y: 1, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4030043115054375632}
@@ -132,7 +117,7 @@ Transform:
   - {fileID: 4030043115054375642}
   - {fileID: 4030043115054375640}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4030043115054481140
 GameObject:
@@ -145,7 +130,6 @@ GameObject:
   - component: {fileID: 4030043115054375636}
   - component: {fileID: 4030043115055702774}
   - component: {fileID: 4030043115056668726}
-  - component: {fileID: 1723047213050223601}
   m_Layer: 0
   m_Name: car-taxi-china-wheel_BR
   m_TagString: Untagged
@@ -218,20 +202,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1723047213050223601
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4030043115054481140}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300004, guid: 3405ac829edd2cc4cbe0535953095af0, type: 3}
 --- !u!1 &4030043115054481142
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,7 +213,6 @@ GameObject:
   - component: {fileID: 4030043115054375638}
   - component: {fileID: 4030043115055702768}
   - component: {fileID: 4030043115056668720}
-  - component: {fileID: 5197436910471688129}
   m_Layer: 0
   m_Name: car-taxi-china-wheel_BL
   m_TagString: Untagged
@@ -316,20 +285,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5197436910471688129
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4030043115054481142}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: 3405ac829edd2cc4cbe0535953095af0, type: 3}
 --- !u!1 &4030043115054481144
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,7 +296,6 @@ GameObject:
   - component: {fileID: 4030043115054375640}
   - component: {fileID: 4030043115055702778}
   - component: {fileID: 4030043115056668730}
-  - component: {fileID: 8581255808968277141}
   m_Layer: 0
   m_Name: car-taxi-china-wheel_FR
   m_TagString: Untagged
@@ -414,20 +368,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8581255808968277141
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4030043115054481144}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300008, guid: 3405ac829edd2cc4cbe0535953095af0, type: 3}
 --- !u!1 &4030043115054481146
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,7 +379,6 @@ GameObject:
   - component: {fileID: 4030043115054375642}
   - component: {fileID: 4030043115055702772}
   - component: {fileID: 4030043115056668724}
-  - component: {fileID: 2488117400632320581}
   m_Layer: 0
   m_Name: car-taxi-china-wheel_FL
   m_TagString: Untagged
@@ -512,17 +451,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2488117400632320581
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4030043115054481146}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300006, guid: 3405ac829edd2cc4cbe0535953095af0, type: 3}

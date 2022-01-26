@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     public Transform colliderTransform;
     public Transform playerCentre;
     public Rigidbody rb;
+    public Animator animator;
+
 
     [Header("Movement")]
     public float runSpeed=6f;
@@ -91,6 +93,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         PerformActions();
+        PerformAnimations();
         RunCrouchTimer();
         RunSuperJumpTimer();
         RunSlipTimer();
@@ -98,6 +101,14 @@ public class PlayerController : MonoBehaviour
         RunShieldTimer();
         RunBlackHoleTimer();
     }
+
+    void PerformAnimations()
+    {
+        animator.SetBool("air",!isGrounded);
+        animator.SetBool("slide",isCrouched);
+        animator.speed = isRunningBlackHoleTimer == true ? 2f : 1f;
+    }
+
     void RunBlackHoleTimer()
     {
         if (isRunningBlackHoleTimer)
@@ -151,7 +162,6 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator FixedTravelCor(Vector3 startPoint,Vector3 launchPointVector3)
     {
-        transform.position = startPoint;
         while (Vector3.Distance(transform.position, launchPointVector3)>=0.01f)
         {
             transform.position = Vector3.MoveTowards(transform.position, launchPointVector3,Time.deltaTime*rampSnapMoveSpeed);
@@ -322,7 +332,8 @@ public class PlayerController : MonoBehaviour
     void CheckGround()
     {
         isGrounded = Physics.Raycast(playerCentre.position, Vector3.down,playerHeight/2+0.1f);
-        if(isPlummiting&&isGrounded&&isGrounded!=!isGrounded)
+        Debug.DrawLine(playerCentre.position, playerCentre.position+Vector3.down,Color.red);
+        if(isPlummiting&&isGrounded)
         {
             isPlummiting = false;
             Crouch();
@@ -432,7 +443,7 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        colliderTransform.localScale = new Vector3(colliderTransform.localScale.x, playerHeight/4f, colliderTransform.localScale.z);
+        colliderTransform.localScale = new Vector3(colliderTransform.localScale.x, playerHeight/ 2.8f, colliderTransform.localScale.z);
         isCrouched = true;
     }
 
