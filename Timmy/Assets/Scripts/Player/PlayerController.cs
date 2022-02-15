@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Jumping")]
     public float jumpForce=15f;
+    public float superJumpForce = 30f;
 
     [Header("Crouch")]
     public float plumitForce=5f;
@@ -95,7 +96,7 @@ public class PlayerController : MonoBehaviour
     {
         PerformActions();
         PerformAnimations();
-        RunCrouchTimer();
+       // RunCrouchTimer();
         RunSuperJumpTimer();
         RunSlipTimer();
         RunProjectileReplenshmentTimer();
@@ -269,7 +270,7 @@ public class PlayerController : MonoBehaviour
     void Superjump()
     {
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        rb.AddForce(Vector3.up * superJumpForce, ForceMode.Impulse);
 
         isRunningSuperJumpTimer = true;
 
@@ -418,6 +419,11 @@ public class PlayerController : MonoBehaviour
                 CalculateTargetXPosition();
                 switchLane = true;
             }
+        }
+        
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            UnCrouch();
         }
     }
 

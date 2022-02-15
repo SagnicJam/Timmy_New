@@ -23,14 +23,17 @@ public class Track : MonoBehaviour
         //get total
         for (int i = 0; i < environmentSpawnner.Count; i++)
         {
-            List<int> weightList = new List<int>();
-            for (int j = 0; j < environmentSpawnner[i].environmentDatas.Count; j++)
+            if (environmentSpawnner[i].environmentDatas.Count > 0)
             {
-                weightList.Add(environmentSpawnner[i].environmentDatas[j].weight);
+                List<int> weightList = new List<int>();
+                for (int j = 0; j < environmentSpawnner[i].environmentDatas.Count; j++)
+                {
+                    weightList.Add(environmentSpawnner[i].environmentDatas[j].weight);
+                }
+                int index = GetRandomWeightedUtility.GetWeightedIndex(weightList);
+                activeGameObjects.Add(environmentSpawnner[i].environmentDatas[index].go);
+                environmentSpawnner[i].environmentDatas[index].go.SetActive(true);
             }
-            int index = GetRandomWeightedUtility.GetWeightedIndex(weightList);
-            activeGameObjects.Add(environmentSpawnner[i].environmentDatas[index].go);
-            environmentSpawnner[i].environmentDatas[index].go.SetActive(true);
         }
     }
 
