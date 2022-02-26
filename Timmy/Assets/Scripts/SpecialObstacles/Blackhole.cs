@@ -8,8 +8,16 @@ public class Blackhole : ObstacleCollider
     {
         if (other.gameObject.tag == "Player")
         {
-            PlayerController playerController = other.gameObject.GetComponent<PlayerCollider>().playerController;
-            playerController.IncreasePlayerMoveSpeed();
+            PlayerCollider playerCollider = other.gameObject.GetComponent<PlayerCollider>();
+            if (playerCollider.playerController != null)
+            {
+                if (!playerCollider.playerController.isInvulnerable)
+                {
+                    playerCollider.playerController.IncreasePlayerMoveSpeed();
+
+                    Debug.Log("<color=blue>Black hole </color>");
+                }
+            }
         }
     }
 }

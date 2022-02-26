@@ -8,8 +8,16 @@ public class WaterPuddle : ObstacleCollider
     {
         if (other.gameObject.tag == "Player")
         {
-            PlayerController playerController = other.gameObject.GetComponent<PlayerCollider>().playerController;
-            playerController.SlipPlayer();
+            PlayerCollider playerCollider = other.gameObject.GetComponent<PlayerCollider>();
+            if (playerCollider.playerController != null)
+            {
+                if (!playerCollider.playerController.isInvulnerable)
+                {
+                    playerCollider.playerController.SlipPlayer();
+
+                    Debug.Log("<color=blue>WaterPuddle </color>");
+                }
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,7 +9,6 @@ public class PlayerController : MonoBehaviour
     public Transform playerCentre;
     public Rigidbody rb;
     public Animator animator;
-
 
     [Header("Movement")]
     public float runSpeed=6f;
@@ -20,6 +20,10 @@ public class PlayerController : MonoBehaviour
     public float currentAirMultiplier;
     public float currentMovementMultiplier;
     bool isPlummitingForLaneSwitch;
+
+    [Header("EnableAbility")]
+    public bool canFireLaser;
+    public bool canEnableShield;
 
     [Header("Special Mechanic")]
     [Header("SuperJump")]
@@ -80,10 +84,15 @@ public class PlayerController : MonoBehaviour
     [Header("LaneSwitch")]
     public float laneDistance=2.5f;
     public float switchLaneSpeed=10f;
-    int currentLane = 1;
+    public int currentLane = 1;
     float transitionX;
     float targetX;
     bool switchLane;
+
+    [Header("InVulnerable")]
+    public float invulnerableTime;
+    public float invulnerableTimeTemp;
+    public bool isInvulnerable;
 
     private void Start()
     {
@@ -96,6 +105,7 @@ public class PlayerController : MonoBehaviour
     {
         PerformActions();
         PerformAnimations();
+        RunInvulnerablilityTimer();
        // RunCrouchTimer();
         RunSuperJumpTimer();
         RunSlipTimer();
@@ -228,6 +238,22 @@ public class PlayerController : MonoBehaviour
             else
             {
                 slipTimeTemp += Time.deltaTime;
+            }
+        }
+    }
+
+    void RunInvulnerablilityTimer()
+    {
+        if (isInvulnerable)
+        {
+            if (invulnerableTimeTemp >= invulnerableTime)
+            {
+                isInvulnerable = false;
+                invulnerableTimeTemp = 0;
+            }
+            else
+            {
+                invulnerableTimeTemp += Time.deltaTime;
             }
         }
     }
@@ -388,7 +414,7 @@ public class PlayerController : MonoBehaviour
                 Plumit();
             }
         }
-        else if (Input.GetKeyDown(KeyCode.B))
+        else if (canEnableShield&&Input.GetKeyDown(KeyCode.B))
         {
             if(!isShieldOn)
             {
@@ -396,7 +422,7 @@ public class PlayerController : MonoBehaviour
                 shield.Initialise();
             }
         }
-        else if(Input.GetKeyDown(KeyCode.X))
+        else if(canFireLaser&&Input.GetKeyDown(KeyCode.X))
         {
             if (currentProjectiles > 0)
             {

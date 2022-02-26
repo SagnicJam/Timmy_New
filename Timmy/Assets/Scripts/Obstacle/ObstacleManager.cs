@@ -46,6 +46,7 @@ public class ObstacleManager : MonoBehaviour
         ObstacleSpawnner obstacleSpawnner = obstacleSpawnners[GetRandomWeightedUtility.GetWeightedIndex(weights)];
         Obstacle obstacle=obstacleSpawnner.SpawnObstacle(nextSpawnPoint);
         nextSpawnPoint += Vector3.forward * obstacleSpawnner.length* cellZLength;
+
         obstacleQueue.Enqueue(obstacle);
         obstacleIndexSpawnnedLast++;
 

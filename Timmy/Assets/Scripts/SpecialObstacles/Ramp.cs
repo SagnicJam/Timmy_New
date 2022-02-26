@@ -11,8 +11,17 @@ public class Ramp : ObstacleCollider
     {
         if (other.gameObject.tag == "Player")
         {
-            PlayerController playerController = other.gameObject.GetComponent<PlayerCollider>().playerController;
-            playerController.TravelToRampLaunchPoint(startPoint,launchPoint);
+            PlayerCollider playerCollider = other.gameObject.GetComponent<PlayerCollider>();
+            if (playerCollider.playerController != null)
+            {
+                if (!playerCollider.playerController.isInvulnerable)
+                {
+                    playerCollider.playerController.TravelToRampLaunchPoint(startPoint, launchPoint);
+
+                    Debug.Log("<color=blue>Ramp </color>");
+                }
+            }
+
         }
     }
 }

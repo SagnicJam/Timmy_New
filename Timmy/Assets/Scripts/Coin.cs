@@ -10,6 +10,8 @@ public class Coin : MonoBehaviour
         {
             Obstacle obstacle =GetComponentInParent<Obstacle>();
             obstacle.Deactivate(gameObject);
+
+            GameManager.instance.OnCoinCollected();
         }
     }
 }
