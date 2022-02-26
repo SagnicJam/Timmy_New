@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
     public int livetimeCounterBeforeMatchStart;
     public float finalZ;
     public static int currentScore;
+    public int currentLevelScore;
 
     [Header("UnityEvents")]
     public UnityEvent onStartCounterComplete;
@@ -76,6 +77,7 @@ public class GameManager : MonoBehaviour
     public void OnCoinCollected()
     {
         currentScore++;
+        currentLevelScore++;
         currentScoreText.text = currentScore.ToString();
         if (currentScore> PlayerPrefs.GetInt("HighScore"))
         {
@@ -168,6 +170,7 @@ public class GameManager : MonoBehaviour
     public void ReplaySameLevel()
     {
         Time.timeScale = 1;
+        currentScore -= currentLevelScore;
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
     }
@@ -182,6 +185,7 @@ public class GameManager : MonoBehaviour
 
     public void GoToGameStart()
     {
+        currentScore = 0;
         Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
