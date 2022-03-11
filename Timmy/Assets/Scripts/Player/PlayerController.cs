@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController instance;
+
+    public GameObject smokeTrailer;
+
     [Header("References")]
     public Transform colliderTransform;
     public Transform playerCentre;
@@ -94,6 +98,21 @@ public class PlayerController : MonoBehaviour
     public float invulnerableTimeTemp;
     public bool isInvulnerable;
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    public void HidePlayer()
+    {
+        animator.gameObject.SetActive(false);
+    }
+
+    public void ShowPlayer()
+    {
+        animator.gameObject.SetActive(true);
+    }
+
     private void Start()
     {
         currentProjectiles = projectileLimit;
@@ -112,6 +131,15 @@ public class PlayerController : MonoBehaviour
         RunProjectileReplenshmentTimer();
         RunShieldTimer();
         RunBlackHoleTimer();
+
+        if (isGrounded)
+        {
+            smokeTrailer.SetActive(true);
+        }
+        else
+        {
+            smokeTrailer.SetActive(false);
+        }
     }
 
     void PerformAnimations()
@@ -385,34 +413,17 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.W))
         {
-            if (isCrouched)
-            {
-                UnCrouch();
-            }
-            Jump();
+            WPressed();
         }
-        else if(Input.GetKeyDown(KeyCode.Space) && isGrounded&&!isRunningSuperJumpTimer)
+        else if(Input.GetKeyDown(KeyCode.Space) )
         {
-            if (isCrouched)
-            {
-                UnCrouch();
-            }
-            Superjump();
+            SpacePressed();
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
-            if(isGrounded)
-            {
-                Crouch();
-            }
-            else
-            {
-                //drop down fast & trigger crouch on land
-                //on grounded trigger crouch
-                Plumit();
-            }
+            SPressed();
         }
         else if (canEnableShield&&Input.GetKeyDown(KeyCode.B))
         {
@@ -433,24 +444,77 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.A))
             {
-                //move left
-                MoveLane(false);
-                CalculateTargetXPosition();
-                switchLane = true;
+                APressed();
             }
             if (Input.GetKeyDown(KeyCode.D))
             {
-                //move right
-                MoveLane(true);
-                CalculateTargetXPosition();
-                switchLane = true;
+                DPressed();
             }
         }
         
         if (Input.GetKeyUp(KeyCode.S))
         {
-            UnCrouch();
+            SUp();
         }
+    }
+
+    public void APressed()
+    {
+        //move left
+        MoveLane(false);
+        CalculateTargetXPosition();
+        switchLane = true;
+    }
+
+    public void SpacePressed()
+    {
+        if (isGrounded && !isRunningSuperJumpTimer)
+        {
+            if (isCrouched)
+            {
+                UnCrouch();
+            }
+            Superjump();
+        }
+    }
+
+    public void WPressed()
+    {
+        if (isGrounded)
+        {
+            if (isCrouched)
+            {
+                UnCrouch();
+            }
+            Jump();
+        }
+    }
+
+    public void DPressed()
+    {
+        //move right
+        MoveLane(true);
+        CalculateTargetXPosition();
+        switchLane = true;
+    }
+
+    public void SPressed()
+    {
+        if (isGrounded)
+        {
+            Crouch();
+        }
+        else
+        {
+            //drop down fast & trigger crouch on land
+            //on grounded trigger crouch
+            Plumit();
+        }
+    }
+
+    public void SUp()
+    {
+        UnCrouch();
     }
 
     void CalculateTargetXPosition()

@@ -13,4 +13,9 @@ public class StartGame : MonoBehaviour
             SceneManager.LoadScene(nextSceneIndex);
         }
     }
+
+    public void GoToYoutube()
+    {
+        Application.OpenURL("https://www.youtube.com/user/tommyturnpike/videos");
+    }
 }

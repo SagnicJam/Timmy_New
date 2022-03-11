@@ -60,6 +60,44 @@ public class GameManager : MonoBehaviour
         timeTaken += Time.deltaTime;
     }
 
+    public void PulsateCurrentScore()
+    {
+        StopCoroutine("PulsateCS");
+        StartCoroutine("PulsateCS");
+    }
+
+    public float maxScale = 1.2f;
+    public float scaleSpeed = 1f;
+    IEnumerator PulsateCS()
+    {
+        Vector3 currentScale = currentScoreText.transform.localScale;
+        Vector3 finalScale = Vector3.one * maxScale;
+
+        float t1 = 0;
+        while(finalScale.x - currentScoreText.transform.localScale.x > 0.01f)
+        {
+            currentScoreText.transform.localScale = Mathf.Lerp(currentScale.x, finalScale.x, t1) * Vector3.one;
+            t1 += Time.unscaledDeltaTime* scaleSpeed;
+            yield return null;
+        }
+
+        currentScoreText.transform.localScale = finalScale;
+        Vector3 currentScale2 = currentScoreText.transform.localScale;
+        Vector3 finalScale2 = Vector3.one;
+        float t2 = 0;
+
+        while (currentScoreText.transform.localScale.x - finalScale2.x > 0.01f)
+        {
+            currentScoreText.transform.localScale = Mathf.Lerp(currentScale2.x, finalScale2.x, t2) * Vector3.one;
+            t2 += Time.unscaledDeltaTime * scaleSpeed;
+            yield return null;
+        }
+
+        currentScoreText.transform.localScale = finalScale2;
+        yield break;
+    }
+
+
     private void Start()
     {
         highScoreText.text = PlayerPrefs.GetInt("HighScore").ToString();
@@ -78,6 +116,7 @@ public class GameManager : MonoBehaviour
     {
         currentScore++;
         currentLevelScore++;
+        PulsateCurrentScore();
         currentScoreText.text = currentScore.ToString();
         if (currentScore> PlayerPrefs.GetInt("HighScore"))
         {
@@ -100,6 +139,7 @@ public class GameManager : MonoBehaviour
             timerCircleImage.color = timerUIData[livetimeCounterBeforeMatchStart].color;
             timerText.text = timerUIData[livetimeCounterBeforeMatchStart].message;
             livetimeCounterBeforeMatchStart++;
+            JukeBoxUnit.instance.PlaySFX(0);
             yield return new WaitForSecondsRealtime(1);
         }
         //Start Match here...
@@ -163,6 +203,8 @@ public class GameManager : MonoBehaviour
 
     public void ShowLooseScreen()
     {
+        JukeBoxUnit.instance.PlayVFX(0, PlayerController.instance.playerCentre.position);
+        PlayerController.instance.HidePlayer();
         looseScreen.SetActive(true);
         Time.timeScale = 0;
     }
@@ -172,6 +214,8 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         currentScore -= currentLevelScore;
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        PlayerController.instance.ShowPlayer();
         SceneManager.LoadScene(currentSceneIndex);
     }
 
@@ -180,6 +224,8 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         attempts++;
         playerController.isInvulnerable = true;
+
+        PlayerController.instance.ShowPlayer();
         //Make player invunlerable for 3 seconds to obstacles
     }
 

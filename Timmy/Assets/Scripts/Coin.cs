@@ -10,8 +10,9 @@ public class Coin : MonoBehaviour
         {
             Obstacle obstacle =GetComponentInParent<Obstacle>();
             obstacle.Deactivate(gameObject);
-
+            JukeBoxUnit.instance.PlayVFX(1,transform.position);
             GameManager.instance.OnCoinCollected();
+
         }
     }
 }
