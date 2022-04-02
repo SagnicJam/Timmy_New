@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     public float currentAirMultiplier;
     public float currentMovementMultiplier;
     bool isPlummitingForLaneSwitch;
+    public bool isEnabled;
 
     [Header("EnableAbility")]
     public bool canFireLaser;
@@ -116,6 +117,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         currentProjectiles = projectileLimit;
+        GameManager.instance.fireText.text = currentProjectiles.ToString();
         currentMovementMultiplier = movementMultiplier;
         currentAirMultiplier = airMultiplier;
     }
@@ -140,6 +142,20 @@ public class PlayerController : MonoBehaviour
         {
             smokeTrailer.SetActive(false);
         }
+
+        if (tempCooldownShield>0)
+        {
+            tempCooldownShield -= Time.deltaTime;
+            if (tempCooldownShield < 0)
+            {
+                tempCooldownShield = 0;
+            }
+            GameManager.instance.shieldTimer.fillAmount = tempCooldownShield / maxCooldownShield;
+        }
+        else
+        {
+            GameManager.instance.shieldTimer.fillAmount = 0 / maxCooldownShield;
+        }
     }
 
     void PerformAnimations()
@@ -153,6 +169,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isRunningBlackHoleTimer)
         {
+            speedFX.SetActive(true);
             if (blackHoleTimeTemp >= blackHoleTime)
             {
                 isRunningBlackHoleTimer = false;
@@ -163,6 +180,10 @@ public class PlayerController : MonoBehaviour
             {
                 blackHoleTimeTemp += Time.deltaTime;
             }
+        }
+        else
+        {
+            speedFX.SetActive(false);
         }
     }
 
@@ -183,6 +204,8 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    float maxCooldownShield=10;
+    float tempCooldownShield=0;
 
     IEnumerator cor;
 
@@ -230,12 +253,19 @@ public class PlayerController : MonoBehaviour
     public void SlipPlayer()
     {
         isSlipping = true;
+        animator.SetBool("air", false);
+        animator.SetBool("slide", false);
+        animator.SetBool("slip", true);
     }
 
-    void FireLaserProjectile()
+    public void FireLaserProjectile()
     {
-        ProjectileSpawnner.instance.SpawnProjectile(projectileSpawnPoint.position);
-        currentProjectiles--;
+        if (currentProjectiles > 0)
+        {
+            ProjectileSpawnner.instance.SpawnProjectile(projectileSpawnPoint.position);
+            currentProjectiles--;
+            GameManager.instance.fireText.text = currentProjectiles.ToString();
+        }
     }
 
     void RunProjectileReplenshmentTimer()
@@ -246,6 +276,7 @@ public class PlayerController : MonoBehaviour
             {
                 currentProjectiles++;
                 replenishTimeForOneProjectileTemp = 0;
+                GameManager.instance.fireText.text = currentProjectiles.ToString();
             }
             else
             {
@@ -261,6 +292,9 @@ public class PlayerController : MonoBehaviour
             if (slipTimeTemp >= slipTime)
             {
                 isSlipping = false;
+                animator.SetBool("slip", false);
+                animator.SetBool("air", !isGrounded);
+                animator.SetBool("slide", isCrouched);
                 slipTimeTemp = 0;
             }
             else
@@ -269,6 +303,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    public GameObject speedFX;
 
     void RunInvulnerablilityTimer()
     {
@@ -277,6 +312,7 @@ public class PlayerController : MonoBehaviour
             if (invulnerableTimeTemp >= invulnerableTime)
             {
                 isInvulnerable = false;
+                invulfx.SetActive(false);
                 invulnerableTimeTemp = 0;
             }
             else
@@ -372,6 +408,7 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(rb.transform.forward * runSpeed * currentAirMultiplier, ForceMode.Acceleration);
         }
     }
+    public GameObject invulfx;
 
     void ControlDrag()
     {
@@ -425,20 +462,13 @@ public class PlayerController : MonoBehaviour
         {
             SPressed();
         }
-        else if (canEnableShield&&Input.GetKeyDown(KeyCode.B))
+        else if (Input.GetKeyDown(KeyCode.B))
         {
-            if(!isShieldOn)
-            {
-                isShieldOn = true;
-                shield.Initialise();
-            }
+            ShieldPressed();
         }
         else if(canFireLaser&&Input.GetKeyDown(KeyCode.X))
         {
-            if (currentProjectiles > 0)
-            {
                 FireLaserProjectile();
-            }
         }
         if(!switchLane)
         {
@@ -455,6 +485,21 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.S))
         {
             SUp();
+        }
+    }
+
+    public void ShieldPressed()
+    {
+        if (!isShieldOn && canEnableShield)
+        {
+            if (tempCooldownShield > 0f)
+            {
+                return;
+            }
+
+            isShieldOn = true;
+            shield.Initialise();
+            tempCooldownShield = maxCooldownShield;
         }
     }
 

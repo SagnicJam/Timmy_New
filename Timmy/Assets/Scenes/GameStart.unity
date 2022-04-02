@@ -133,7 +133,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3374644142786611613, guid: a0f61a2ea975bf9459b1a694fb690fcd, type: 3}
       propertyPath: m_text
-      value: TRUNPIKE
+      value: TURNPIKE
       objectReference: {fileID: 0}
     - target: {fileID: 3374644142786611613, guid: a0f61a2ea975bf9459b1a694fb690fcd, type: 3}
       propertyPath: m_fontSize
@@ -1518,6 +1518,42 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1592032600}
     m_Modifications:
+    - target: {fileID: 78678709450429664, guid: 60d7d1558c081d84db6fe22e6353bc36, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 78678709450429664, guid: 60d7d1558c081d84db6fe22e6353bc36, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 78678709450429664, guid: 60d7d1558c081d84db6fe22e6353bc36, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1182788400}
+    - target: {fileID: 78678709450429664, guid: 60d7d1558c081d84db6fe22e6353bc36, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 78678709450429664, guid: 60d7d1558c081d84db6fe22e6353bc36, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: ToggleIt
+      objectReference: {fileID: 0}
+    - target: {fileID: 78678709450429664, guid: 60d7d1558c081d84db6fe22e6353bc36, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: SoundToggler, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 78678709450429664, guid: 60d7d1558c081d84db6fe22e6353bc36, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 78678709450429664, guid: 60d7d1558c081d84db6fe22e6353bc36, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 78678709450429670, guid: 60d7d1558c081d84db6fe22e6353bc36, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 78678710127575560, guid: 60d7d1558c081d84db6fe22e6353bc36, type: 3}
       propertyPath: m_Name
       value: SoundToggle
@@ -1606,6 +1642,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 78678711018575681, guid: 60d7d1558c081d84db6fe22e6353bc36, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 78678711018575681, guid: 60d7d1558c081d84db6fe22e6353bc36, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 78678711018575681, guid: 60d7d1558c081d84db6fe22e6353bc36, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1182788400}
+    - target: {fileID: 78678711018575681, guid: 60d7d1558c081d84db6fe22e6353bc36, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 78678711018575681, guid: 60d7d1558c081d84db6fe22e6353bc36, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: ToggleIt
+      objectReference: {fileID: 0}
+    - target: {fileID: 78678711018575681, guid: 60d7d1558c081d84db6fe22e6353bc36, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: SoundToggler, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 78678711018575681, guid: 60d7d1558c081d84db6fe22e6353bc36, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 78678711018575686, guid: 60d7d1558c081d84db6fe22e6353bc36, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 140
+      objectReference: {fileID: 0}
+    - target: {fileID: 78678711018575686, guid: 60d7d1558c081d84db6fe22e6353bc36, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 140
+      objectReference: {fileID: 0}
+    - target: {fileID: 78678711018575687, guid: 60d7d1558c081d84db6fe22e6353bc36, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 60d7d1558c081d84db6fe22e6353bc36, type: 3}
@@ -1614,6 +1690,24 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 78678710127575563, guid: 60d7d1558c081d84db6fe22e6353bc36, type: 3}
   m_PrefabInstance: {fileID: 1182788397}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1182788399 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 78678710127575560, guid: 60d7d1558c081d84db6fe22e6353bc36, type: 3}
+  m_PrefabInstance: {fileID: 1182788397}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1182788400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182788399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aada5ecabe042834cb3bb0a8cc9fc423, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  togglapan: 0
 --- !u!1001 &1353609353
 PrefabInstance:
   m_ObjectHideFlags: 0

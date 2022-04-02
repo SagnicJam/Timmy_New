@@ -64,6 +64,7 @@ public class Projectile : MonoBehaviour
             if(!(obstacleCollider is WaterPuddle))
             {
                 obstacleCollider.obstacle.Deactivate(other.gameObject);
+                GameManager.instance.SpawnExplosion(obstacleCollider.gameObject.transform.position);
                 if (cor != null)
                 {
                     StopCoroutine(cor);

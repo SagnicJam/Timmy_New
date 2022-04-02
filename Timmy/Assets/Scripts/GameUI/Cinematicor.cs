@@ -5,15 +5,22 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class Cinematicor : MonoBehaviour
 {
+    public static Cinematicor instance;
     public float fadeSpeed;
     public float cameraSpeed;
 
     public CanvasGroup canvasGroup;
-    public Camera cam;
+    public Transform cam;
     public List<Transform> transformsList;
 
     Vector3 initPos;
     Quaternion initRot;
+    bool canSpawnObstacles;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {

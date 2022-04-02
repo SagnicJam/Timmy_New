@@ -8,6 +8,18 @@ public class Obstacle : MonoBehaviour
     public List<GameObject> deactivatedGOObstacles;
     public ObstacleTrigger obstacleTrigger;
     IObjectPool<Obstacle> obstaclePool;
+
+    public void HideObstacles()
+    {
+        for(int i=0; i<transform.childCount; i++)
+        {
+            if (transform.GetChild(i).gameObject.name!= "TriggerNextZone" && transform.GetChild(i).gameObject.name != "respawnPoint")
+            {
+                transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+    }
+
     public void SetPool(IObjectPool<Obstacle> pool)
     {
         obstaclePool = pool;
@@ -16,6 +28,10 @@ public class Obstacle : MonoBehaviour
     public void InitialiseObstacle(bool triggerNextObstacle)
     {
         obstacleTrigger.gameObject.SetActive(triggerNextObstacle);
+        if (GameManager.instance.CheckObstacleSpawnEnd(transform.position.z))
+        {
+            HideObstacles();
+        }
     }
 
     public void DestroyToPool()

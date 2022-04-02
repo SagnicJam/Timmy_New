@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
+  
     [Header("Tweak Params")]
     public int allThreeStarsPoints;
     public int twoStarsPoints;
@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public PlayerController playerController;
     public int levelLength;
     public TimerUIData[] timerUIData;
+    public float clearance;
 
     [Multiline]
     public string[] motivationalMessageArr;
@@ -49,10 +50,17 @@ public class GameManager : MonoBehaviour
 
     [Header("UnityEvents")]
     public UnityEvent onStartCounterComplete;
-
+    public bool started;
     private void Awake()
     {
         instance = this;
+    }
+
+    public GameObject expoVFX;
+    public void SpawnExplosion(Vector3 pos)
+    {
+        GameObject g = Instantiate(expoVFX);
+        g.transform.position = pos;
     }
 
     private void Update()
@@ -112,6 +120,13 @@ public class GameManager : MonoBehaviour
         return finalZ <= playerController.transform.position.z;
     }
 
+    public bool CheckObstacleSpawnEnd(float zValue)
+    {
+        bool result = (finalZ - clearance <= zValue) && started;
+        Debug.Log("RESYKT " + result);
+        return result;
+    }
+
     public void OnCoinCollected()
     {
         currentScore++;
@@ -128,7 +143,7 @@ public class GameManager : MonoBehaviour
     public void StartCountTimer()
     {
         StartCoroutine(TimerToStartGame());
-    }
+    }   
 
     IEnumerator TimerToStartGame()
     {
@@ -145,6 +160,7 @@ public class GameManager : MonoBehaviour
         //Start Match here...
         Time.timeScale = 1;
         onStartCounterComplete?.Invoke();
+        started = true;
         yield break;
     }
 
@@ -224,11 +240,26 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         attempts++;
         playerController.isInvulnerable = true;
-
+        playerController.invulfx.SetActive(true);
         PlayerController.instance.ShowPlayer();
         //Make player invunlerable for 3 seconds to obstacles
     }
 
+    public void FirePlayer()
+    {
+        PlayerController.instance.FireLaserProjectile();
+    }
+
+    public void ShieldPlayer()
+    {
+        PlayerController.instance.ShieldPressed();
+    }
+
+    public GameObject fireButton;
+    public GameObject shieldButton;
+    public Image fireTimer;
+    public Image shieldTimer;
+    public TextMeshProUGUI fireText;
     public void GoToGameStart()
     {
         currentScore = 0;
